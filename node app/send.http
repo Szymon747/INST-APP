@@ -1,0 +1,22 @@
+### GET - nowe dane
+GET http://localhost:3000/api/photos HTTP/1.1
+
+
+###
+GET http://localhost:3000/api/photos/1 HTTP/1.1
+
+
+### POST - nowe dane
+POST http://localhost:3000/api/photos HTTP/1.1
+content-type: application/json
+
+{"a":1,"b":2}
+
+### DELETE - nowe dane
+DELETE http://localhost:3000/api/photos/1 HTTP/1.1
+
+### PATCH - nowe dane
+PATCH http://localhost:3000/api/photos HTTP/1.1
+content-type: application/json
+
+{"a":1,"b":2}
