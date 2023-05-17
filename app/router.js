@@ -1,5 +1,5 @@
+const datacolected = require("./jsoncontroller.js")
 const router = async (request, response) => {
-    const datacolected = [{}]
 
     switch (request.method) {
         case "GET":
@@ -15,27 +15,27 @@ const router = async (request, response) => {
         case "POST":
             if (request.url == "/api/photos") {
                 console.log("3")
-                // console.log(request)
                 const formidable = require('formidable');
                 const form = formidable({ multiples: true, keepExtensions: true });
                 form.uploadDir = 'album'
                 form.parse(request, (err, fields, files) => {
+                    
                     let newdata = {
-                        "id": "id",
+                        "id":  Date.now(),
                         "album": "album",
-                        "originalName": "originalName",
-                        "url": "url",
+                        "originalName": files.originalName,
+                        "url": files.album._writeStream.path,
                         "lastChange": "original",
                         "history": [
                             {
                                 "status": "original",
-                                "lastModifiedDate": "lastModifiedDate"
+                                "lastModifiedDate":  Date.now()
                             }
                         ]
                     }
 
                     datacolected.push(newdata)
-                    console.log(datacolected.length)
+                    console.log("-----------------")
                 });
             }
             break;
