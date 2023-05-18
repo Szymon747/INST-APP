@@ -1,12 +1,16 @@
 const datacolected = require("./jsoncontroller.js")
+const filecontroller = require("./filecontroller.js")
 const router = async (request, response) => {
 
     switch (request.method) {
         case "GET":
             if (request.url == "/api/photos") {
                 console.log("1")
+                response.end(JSON.stringify(datacolected))
             }
             if (request.url.match(/\/api\/photos\/([0-9]+)/)) {
+                let id = request.url.slice(12, request.url.length)
+                response.end(JSON.stringify(datacolected))
                 console.log("2")
             }
 
@@ -15,40 +19,23 @@ const router = async (request, response) => {
         case "POST":
             if (request.url == "/api/photos") {
                 console.log("3")
-                const formidable = require('formidable');
-                const form = formidable({ multiples: true, keepExtensions: true });
-                form.uploadDir = 'album'
-                form.parse(request, (err, fields, files) => {
-                    
-                    let newdata = {
-                        "id":  Date.now(),
-                        "album": "album",
-                        "originalName": files.originalName,
-                        "url": files.album._writeStream.path,
-                        "lastChange": "original",
-                        "history": [
-                            {
-                                "status": "original",
-                                "lastModifiedDate":  Date.now()
-                            }
-                        ]
-                    }
-
-                    datacolected.push(newdata)
-                    console.log("-----------------")
-                });
+                let id = request.url.slice(12, request.url.length)
+                filecontroller.addFile(request, response, id);
             }
             break;
 
         case "DELETE":
             if (request.url.match(/\/api\/photos\/([0-9]+)/)) {
                 console.log("4")
+                let id = request.url.slice(12, request.url.length)
+                filecontroller.deleteFile(request, response, id);
             }
             break;
 
         case "PATCH":
             if (request.url == "/api/photos") {
                 console.log("5")
+                filecontroller.editFile(request, response);
             }
             break;
 
