@@ -1,5 +1,6 @@
-const datacolected = require("./jsoncontroller.js")
+const datacolected = require("./model.js")
 const filecontroller = require("./filecontroller.js")
+const jsoncontroller = require("./jsoncontroller.js")
 const router = async (request, response) => {
 
     switch (request.method) {
@@ -21,6 +22,7 @@ const router = async (request, response) => {
                 console.log("3")
                 let id = request.url.slice(12, request.url.length)
                 filecontroller.addFile(request, response, id);
+                jsoncontroller.addData(request, response, id);
             }
             break;
 

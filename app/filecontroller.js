@@ -1,4 +1,3 @@
-const datacolected = require("./jsoncontroller.js")
 const formidable = require('formidable');
 const form = formidable({ multiples: true, keepExtensions: true });
 const fs = require("fs")
@@ -12,29 +11,10 @@ const addFile = (request, response) => {
                 if (err) {
                     return console.error(err);
                 }
+                form.uploadDir = fields.album
                 console.log('Directory created successfully!');
             });
         }
-
-        form.uploadDir = fields.album
-
-        console.log(fields)
-        let newdata = {
-            id: Date.now(),
-            album: fields.album,
-            originalName: files.originalName,
-            // "url": files.album._writeStream.path,
-            lastChange: "original",
-            history: [
-                {
-                    status: "original",
-                    lastModifiedDate: Date.now()
-                }
-            ]
-        }
-
-        datacolected.push(newdata)
-        console.log("-----------------")
     });
 };
 
