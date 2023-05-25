@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let dane="#love#instagood#fashion#photooftheday#art#photography#instagram#beautiful#picoftheday#nature#happy#cute#travel#style#followme#tbt#instadaily#repost#like4like#summer#beauty#fitness#food#selfie#me#instalike#girl#friends#fun"
+        let nowedane=[]
+        for(let i=1;i<dane.length;i++){
+            console.log(dane.slice(i, i+1));
+            if(dane.slice(i, i+1)=="#"){
+                nowedane.push(dane.slice(0, i))
+                dane=dane.slice(i,dane.length)
+            }
+        }
+        console.log(nowedane)
+    </script>
+</body>
+</html>

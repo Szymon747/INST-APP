@@ -1,18 +1,21 @@
-const datacolected = require("./model.js")
 const filecontroller = require("./filecontroller.js")
 const jsoncontroller = require("./jsoncontroller.js")
+const getrequestdata = require("./getrequestdata.js")
 const router = async (request, response) => {
 
     switch (request.method) {
         case "GET":
             if (request.url == "/api/photos") {
                 console.log("1")
-                response.end(JSON.stringify(datacolected))
+                getrequestdata.getall(request, response)
             }
             if (request.url.match(/\/api\/photos\/([0-9]+)/)) {
                 let id = request.url.slice(12, request.url.length)
-                response.end(JSON.stringify(datacolected))
+                getrequestdata.getone(request, response, id)
                 console.log("2")
+            }
+            if (request.url.match(/\/api\/photos\/tags\/([0-9]+)/)) {
+                console.log("get4")
             }
 
             break;
@@ -23,6 +26,9 @@ const router = async (request, response) => {
                 let id = request.url.slice(12, request.url.length)
                 filecontroller.addFile(request, response, id);
                 jsoncontroller.addData(request, response, id);
+            }
+            if (request.url == "/api/photos/tags") {
+                console.log("post tags")
             }
             break;
 
@@ -38,6 +44,12 @@ const router = async (request, response) => {
             if (request.url == "/api/photos") {
                 console.log("5")
                 filecontroller.editFile(request, response);
+            }
+            if (request.url == "/api/photos/tags") {
+                console.log("tags 1")
+            }
+            if (request.url == "/api/photos/tags/mass") {
+                console.log("tags 2")
             }
             break;
 

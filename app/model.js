@@ -15,4 +15,9 @@ const datacolected = [
     }
 
 ];
-module.exports = datacolected
+const tags = [
+        "photo"
+    
+
+];
+module.exports = datacolected,tags

@@ -7,7 +7,6 @@ const addData = (request, response, id) => {
 
     form.parse(request, (err, fields, files) => {
 
-        console.log(fields)
         let newdata = {
             id: Date.now(),
             album: fields.album,
